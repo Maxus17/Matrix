@@ -14,13 +14,20 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         ShowMainMenu();
+        Debug.Log("start");
+    }
+
+    private void Awake()
+    {
+        ShowMainMenu();
+        Debug.Log("awake");
     }
 
     public void ShowMainMenu()
     {
         mainMenu.SetActive(true);
         Parallax.SetActive(true);
-        //winterParallax.SetActive(false);
+        winterParallax.SetActive(false);
         HideMenuSet();
         HideLevelMenu();
     }
@@ -43,8 +50,8 @@ public class MainMenu : MonoBehaviour
     {
         levelMenu.SetActive(true);
         winterParallax.SetActive(true);
-        Parallax.SetActive(false);
-        HideMainMenu();
+        //Parallax.SetActive(false);
+        //HideMainMenu();
     }
    public void HideLevelMenu()
     {
