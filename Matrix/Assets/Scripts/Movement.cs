@@ -11,14 +11,19 @@ public class Movement : MonoBehaviour {
   private Animator animator; // Variable for the Animator component. [OPTIONAL]
 
   private bool isGrounded; // Variable that will check if character is on the ground.
-  public GameObject groundCheckPoint; // The object through which the isGrounded check is performed.
-  public float groundCheckRadius; // isGrounded check radius.
   public LayerMask groundLayer; // Layer wich the character can jump on.
 
   private bool jumpPressed = false; // Variable that will check is "Space" key is pressed.
   private bool APressed = false; // Variable that will check is "A" key is pressed.
   private bool DPressed = false; // Variable that will check is "D" key is pressed.
-
+  
+  private Vector2 respawnPosition;
+    public void Respawn(){
+        transform.position = respawnPosition;
+    }
+    public void SetRespawnPosition(Vector2 Position){
+        respawnPosition = Position;
+    }
   void Awake() {
     body = GetComponent<Rigidbody2D>(); // Setting the RigidBody2D component.
     sr = GetComponent<SpriteRenderer>(); // Setting the SpriteRenderer component.
@@ -34,9 +39,7 @@ public class Movement : MonoBehaviour {
   }
 
   // Update using for physics calculations.
-  void FixedUpdate() {
-      isGrounded = Physics2D.OverlapCircle(groundCheckPoint.transform.position, groundCheckRadius, groundLayer); // Checking if character is on the ground.
-      
+  void FixedUpdate() {    
       // Left/Right movement.
       if (APressed) {
           body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.

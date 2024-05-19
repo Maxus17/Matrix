@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+public class EndController : MonoBehaviour
 {
-    public void LoadNextLevel()
-    {
+    private void OnTriggerEnter2D(Collider2D col){
+        
+          
         var SceneInd = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(SceneInd + 1);
-
     }
-
-    public void BackToMain()
-    {
-        SceneManager.LoadScene(0);
-    }
-   
+       
+    
+    
 }

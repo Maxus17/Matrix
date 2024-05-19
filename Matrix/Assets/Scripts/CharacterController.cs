@@ -13,6 +13,13 @@ public class CharacterController: MonoBehaviour
     private SpriteRenderer sprite;
     private bool isGrounded=false;
 
+    private Vector2 respawnPosition;
+    public void Respawn(){
+        transform.position = respawnPosition;
+    }
+    public void SetRespawnPosition(Vector2 Position){
+        respawnPosition = Position;
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -36,7 +36,7 @@ public class GameEngine : MonoBehaviour
     public void NextLocation(int sceneNumb)
     {
         SceneManager.LoadScene(sceneNumb);
+
     }
-
-
+    
 }
