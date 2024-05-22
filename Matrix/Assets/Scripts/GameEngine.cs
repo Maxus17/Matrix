@@ -10,7 +10,10 @@ public class GameEngine : MonoBehaviour
     public bool isOn;
     public Sprite MusicOn;
     public Sprite MusicOff;
-    
+
+    private AudioSource audioSource;
+    private Dictionary<string, AudioClip> audioClips;
+
     void Start()
     {
         isOn = true;
@@ -18,14 +21,14 @@ public class GameEngine : MonoBehaviour
 
     public void OnOffSound()
     {
-        if(!isOn)
+        if (!isOn)
         {
             AudioListener.volume = 1.0f;
             isOn = true;
             musicButton.GetComponent<Image>().sprite = MusicOn;
 
         }
-        else if(isOn)
+        else if (isOn)
         {
             AudioListener.volume = 0f;
             isOn = false;
@@ -38,5 +41,4 @@ public class GameEngine : MonoBehaviour
         SceneManager.LoadScene(sceneNumb);
 
     }
-    
 }

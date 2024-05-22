@@ -16,6 +16,10 @@ public class Movement : MonoBehaviour {
   private bool jumpPressed = false; // Variable that will check is "Space" key is pressed.
   private bool APressed = false; // Variable that will check is "A" key is pressed.
   private bool DPressed = false; // Variable that will check is "D" key is pressed.
+    private bool _walking;
+
+    public AudioSource moveSound;
+    public AudioSource jumpSound;
   
   private Vector2 respawnPosition;
     public void Respawn(){
@@ -32,10 +36,29 @@ public class Movement : MonoBehaviour {
 
   // Update() is called every frame.
   void Update() {
-    if (Input.GetKey(KeyCode.A)) APressed = true; // Checking on "A" key pressed.
-    if (Input.GetKey(KeyCode.D)) DPressed = true; // Checking on "D" key pressed.
-    if (Input.GetKeyDown(KeyCode.Space)) {
-          body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);} // Jump physics.
+        if (Input.GetKey(KeyCode.A))
+        { APressed = true;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            DPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            jumpSound.Play();
+        }
+
+        if (!_walking && Input.GetAxisRaw("Horizontal") != 0)
+        {
+            _walking = true;
+            moveSound.Play();
+        }
+        if (_walking && Input.GetAxisRaw("Horizontal") == 0)
+        {
+            _walking=false;
+            moveSound.Stop();
+        }
   }
 
   // Update using for physics calculations.
@@ -44,14 +67,18 @@ public class Movement : MonoBehaviour {
       if (APressed) {
           body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.
           transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
-          APressed = false; // Returning initial value.
+          APressed = false;
       }
       else if (DPressed) {
           body.velocity = new Vector2(runSpeed, body.velocity.y); // Move right physics.
           transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
           DPressed = false; // Returning initial value.
-      }
+        }
       else body.velocity = new Vector2(0, body.velocity.y);
      
   }
+   void PlaySound()
+    {
+        moveSound.Play();
+    }
 }
