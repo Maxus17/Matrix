@@ -9,7 +9,7 @@ public class EndOfLvl : MonoBehaviour
         
           
         var SceneInd = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(SceneInd + 1);
+        SceneManager.LoadScene(0);
     }
        
     
